@@ -1,0 +1,25 @@
+version: '3.4'
+
+services:
+  general-motors.api:
+    image: ${DOCKER_REGISTRY-}generalmotorsapi
+    build:
+      context: .
+      dockerfile: src/General-Motors/General-Motors.API/Dockerfile
+
+
+  SqlServer:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+       - ACCEPT_EULA=Y
+       - SA_PASSWORD=Numsey#2022
+    ports:
+     - "1433:1433"
+    volumes:
+        - ./poliklinika-data:/var/lib/postgresql/data
+  authorization.api:
+    image: ${DOCKER_REGISTRY-}authorizationapi
+    build:
+      context: .
+      dockerfile: src/Authorization.API/Dockerfile
+

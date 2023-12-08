@@ -1,0 +1,6 @@
+@Rivendell_GameClub.API_HostAddress = http://localhost:5207
+
+GET {{Rivendell_GameClub.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

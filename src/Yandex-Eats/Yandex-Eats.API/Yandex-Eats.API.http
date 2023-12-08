@@ -1,0 +1,6 @@
+@Yandex_Eats.API_HostAddress = http://localhost:5170
+
+GET {{Yandex_Eats.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

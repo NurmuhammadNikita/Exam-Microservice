@@ -1,0 +1,63 @@
+﻿using General_Motors.Application.DTOs;
+using General_Motors.Application.Services.BuyersService;
+using General_Motors.Application.Services.VendorsService;
+using General_Motors.Domain.Tables.Entities;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+
+namespace General_Motors.API.Controllers
+{
+    [Route("api/[controller]/[action]")]
+    [ApiController]
+    public class VendorController : ControllerBase
+    {
+        private readonly IVendorService _service;
+
+        public VendorController(IVendorService service)
+        {
+            _service = service;
+        }
+
+        [HttpGet]
+        public async ValueTask<IActionResult> GetAllAsync()
+        {
+            IList<Vendor> result = await _service.GetAllAsync();
+
+            return Ok(result);
+
+        }
+
+        [HttpGet]
+        public async ValueTask<IActionResult> GetByIdAsync(Guid id)
+        {
+            var result = await _service.GetByIdAsync(id);
+            return Ok(result);
+        }
+
+
+        [HttpPost]
+        public async ValueTask<IActionResult> CreateAsync([FromForm] VendorDto dto)
+        {
+            var result = await _service.CreateAsync(dto);
+
+            return Ok(result);
+        }
+
+        [HttpPut]
+        public async ValueTask<IActionResult> UpdateAsync(Guid Id, [FromForm] VendorDto dto)
+        {
+            var result = _service.UpdateAsync(Id, dto);
+
+            return Ok(result);
+        }
+
+        [HttpDelete]
+
+        public async ValueTask<IActionResult> DeleteAsync(Guid Id)
+        {
+            var result = (_service.DeleteAsync(Id));
+
+            return Ok(result);
+        }
+    }
+}
